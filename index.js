@@ -34,12 +34,30 @@ async function createCourse() {
 
 // How to reterive document from mongoDB Database
 async function getCourses() {
+  //   eq(equal)
+  // ne(not equal)
+  // gt(greater than)
+  // gte(greater than or equal to)
+  // lt(less than)
+  // lte(less than or equal to)
+  // in
+  // nin(not in)
+
   const courses = await Course.find()
-//   const courses = await Course
-//     .find({author: 'Nilank Nikhil', isPublished: true})
-//     .limit(10)
-//     .sort({name: 1}) //ascending order if you want descending then -1.
-//     .select({name: 1, tags: 1})
-    console.log(courses)
+    //   const courses = await Course
+    //     .find({author: 'Nilank Nikhil', isPublished: true})
+    //     .limit(10)
+    //     .sort({name: 1}) //ascending order if you want descending then -1.
+    //     .select({name: 1, tags: 1})
+
+    //.find({ price: 10 }) //this will return only the course which has price of 10
+    // .find({ price: { $gt: 10 } })
+    // .find({ price: { $gte: 10 } })
+    // .find({ price: { $gte: 10, $lte: 20 } }) the courses between 10 and 20
+
+    // now we want course which is 10,15,20
+    .find({ price: { $in: [10, 15, 20] } })
+
+  console.log(courses)
 }
 getCourses()
