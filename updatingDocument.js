@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose')
 
 mongoose
@@ -87,4 +88,27 @@ async function getCourses() {
   console.log(courses)
 }
 
-getCourses()
+async function updateCourse(id) {
+  // Approach: Query First
+  // findById()
+  // Modify its properties
+  // save()
+    const course = await Course.findById(id);
+    if(!course) return;
+    course.author = 'Another Author';
+    // course.set({
+    //   isPublished: true,
+    //   author: 'Another Author'
+    // }) u can use any 1 
+    const result = await course.save();
+    console.log(result);
+
+
+  // Approach: update First
+  // Update directly
+  // Optionally: get the updated document
+}
+
+updateCourse('60e7cbb9597b862a8442d7e8')
+
+
