@@ -48,10 +48,16 @@ async function getCourses() {
   // or
   // and
   //   const courses = await Course.find()
-  const courses = await Course.find({
-    author: 'Nilank Nikhil',
-    isPublished: true,
-  })
+
+//   Pagination
+const pageNumber = 2
+const pageSize = 10;
+// /api/courses?pageNumber=2&pageSize=10
+  const courses = await Course
+  .find({author: 'Nilank Nikhil',isPublished: true,})
+    // Implement pagination
+    .skip((pageNumber - 1) * pageSize)
+
 
     // Regular expression
     // Starts with Nilank
@@ -60,10 +66,10 @@ async function getCourses() {
     // .find({ author: /Nikhil$/ })
     // If you want to make case insensitive
     // .find({ author: /Nikhil$/i })
-
     // whose author contains Nilank(NIlank can be at begining at the end at the middle too)
     // .find({ author: /.*Nilank.*/ })
-    .limit(10)
+
+    .limit(pageSize)
     .sort({ name: 1 }) //ascending order if you want descending then -1.
     // .select({ name: 1, tags: 1 })
     // Counting
