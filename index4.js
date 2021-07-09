@@ -49,18 +49,11 @@ async function getCourses() {
   // and
   const courses = await Course.find()
   const courses = await Course
-    // .find({author: 'Nilank Nikhil', isPublished: true})
-
-    // Regular expression
-    // Starts with Nilank
-    .find({ author: /^Nilank/ })
-    // Ends with Nikhil
-    .find({ author: /Nikhil$/ })
-    // If you want to make case insensitive
-    .find({ author: /Nikhil$/i })
-
-    // whose author contains Nilank(NIlank can be at begining at the end at the middle too)
-    .find({ author: /.*Nilank.*/ })
+    //   We want courses that is published by Nilank or the courses that are published
+    .find()
+    .or([{ author: 'Nilank Nikhil' }, { isPublished: true }])
+    .and([])
+    // .find({ author: 'Nilank Nikhil', isPublished: true })
     .limit(10)
     .sort({ name: 1 }) //ascending order if you want descending then -1.
     .select({ name: 1, tags: 1 })
