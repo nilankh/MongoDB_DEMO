@@ -19,6 +19,9 @@ const courseSchema = new mongoose.Schema({
     required: true,
     enum: ['web', 'mobile', 'network'],
     // While creating the course, the category we set, it should be one of these values
+    lowercase: true,
+    uppercase: true,
+    trim: true,
   },
   author: String,
   tags: {
@@ -47,6 +50,10 @@ const courseSchema = new mongoose.Schema({
     },
     min: 10,
     max: 200,
+    
+    // Custom setter and getter
+    get: v => Math.round(v),
+    set: v =>Math.round(v)
   },
 })
 
@@ -56,11 +63,11 @@ async function createCourse() {
   // Now we are creating object based on above class.
   const course = new Course({
     name: 'Angular Course',
-    category: '-',
+    category: 'Web',
     author: 'Nilank Nikhil',
-    tags: null,
+    tags: ['frontend'],
     isPublished: true,
-    price: 15,
+    price: 15.9,
   })
 
   // Classes, objects
