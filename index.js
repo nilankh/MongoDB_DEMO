@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+
+// This connect method return a promise
 mongoose
   .connect('mongodb://localhost/playground')
   .then(() => console.log('Connected to MongoDB...'))
